@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #000000;
+  --bg-elev: rgba(255, 255, 255, 0.035);
+  --fg: #f2f0ea;
+  --fg-dim: rgba(242, 240, 234, 0.56);
+  --fg-faint: rgba(242, 240, 234, 0.32);
+  --border: rgba(242, 240, 234, 0.1);
+  --border-strong: rgba(242, 240, 234, 0.2);
+  --gold: #ffd77b;
+  --gold-dim: rgba(201, 162, 74, 0.5);
+  --ease: cubic-bezier(0.16, 0.9, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg: #f4f2ec;
+  --bg-elev: rgba(10, 10, 11, 0.035);
+  --fg: #12110d;
+  --fg-dim: rgba(18, 17, 13, 0.6);
+  --fg-faint: rgba(18, 17, 13, 0.38);
+  --border: rgba(18, 17, 13, 0.12);
+  --border-strong: rgba(18, 17, 13, 0.22);
+  --gold: #9c7a26;
+  --gold-dim: rgba(156, 122, 38, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+body {
+  font-family:
+    "Space Grotesk",
+    -apple-system,
+    Palatino Linotype;
+  cursor: none;
+  transition:
+    background 0.5s var(--ease),
+    color 0.5s var(--ease);
+}
+@media (hover: none) {
+  body {
+    cursor: auto;
+  }
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* custom cursor */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--fg);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: opacity 0.2s var(--ease);
+}
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  transition:
+    width 0.25s var(--ease),
+    height 0.25s var(--ease),
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+.cursor-ring.label {
+  width: 64px;
+  height: 64px;
+  background: var(--bg-elev);
+  backdrop-filter: blur(6px);
+  border-color: var(--gold-dim);
+}
+@media (hover: none) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* 3D name */
+.name3d {
+  perspective: 900px;
+}
+.name3d .ch {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    transform 0.5s var(--ease),
+    text-shadow 0.5s var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
